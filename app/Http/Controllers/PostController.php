@@ -65,8 +65,6 @@ class PostController extends Controller
             ]);
             // 'content',''user_id,'status'は全部カラム名に一致している！！！！！！
             return redirect() -> route('posts.index');
-            //リダイレクト処理（別のページに遷移させてあげるような処理のこと）
-            //route('')の中身はrouteのところに書いたやつと一致
     }
 
     public function show($id)
