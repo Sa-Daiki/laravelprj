@@ -101,7 +101,6 @@ class PostController extends Controller
     public function update(Request $request, $id)//$id使うことでパラメータの後ろの数字取れる
     {
         $inputs = $request -> all();
-        // dd($inputs);
         Memo::where('id', $id)
                 ->update(['content' => $inputs['content'] ]);
         return redirect() -> route('posts.index');
