@@ -1,0 +1,33 @@
+body{
+    min-height: 100vh;
+    background-color: #f6f6f4;
+    display: block;
+}
+
+header{
+    /* background-image: url(/assets/public/hero-background-885fd333ab5d2e15054b2b2b3b970ebc.png); */
+    background-color: #55c500;
+    color:#fff;
+    display: block;
+};
+
+details{
+    display:block;
+};
+
+ul{
+    /*olの中のliの文字色を変える*/
+    /* color: black; */
+    list-style-type: none;
+    /* ↑かわらない */
+  };
+
+
+/* details[open] {
+    background: #327fa8;
+  }; */
+
+aside{
+    background-color: black;
+    display: block;
+};
