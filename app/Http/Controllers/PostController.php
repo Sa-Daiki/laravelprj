@@ -58,7 +58,7 @@ class PostController extends Controller
 
     public function store(Request $request) //Requestはフォームに入力された値を受け取れる
     {
-            $data = $request -> all(); //送信、受信されたデータをすべて取る
+            $data = $request -> first(); //送信、受信されたデータをすべて取る
             // dd($data);//デバック関数
             $memo_id = Memo::insertGetId([//insertGetIdはメモモデルが持っている命令
                 'content' => $data['content'], 'user_id' => $data['user_id'], 'status' => 1
