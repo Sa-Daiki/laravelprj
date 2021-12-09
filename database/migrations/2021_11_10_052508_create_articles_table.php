@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('memos', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
             $table->longText('content');
-            $table->integer('user_id');
             $table->integer('status')->default('1');
             $table->timestamp('updated_at')->useCurrent()->nullable;
             $table->timestamp('created_at')->useCurrent()->nullable;
+            $table->foreignId('user_id')->constrained();
         });
     }
 
@@ -30,6 +31,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('articles');
     }
 }

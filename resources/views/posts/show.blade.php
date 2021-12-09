@@ -1,5 +1,9 @@
 記事詳細
 {{-- {{ dd($post) }} --}}
-<p>{{$post["content"]}}</p>
-{{-- ここにページの詳細をテーブルからとってきたやつ書く
-対応した記事の詳細取ってくるように記述する必要あり --}}
+<p>{{$article["content"]}}</p>
+<form method='GET' action="/posts/{{$article['id'] }}">
+    @csrf
+    <input type="hidden" name="article_id" value="{{ $article['id']}}">
+    <textarea name="comment" rows="10" cols="50"></textarea>
+    <input type="submit" name="submit" value="投稿">
+</form>

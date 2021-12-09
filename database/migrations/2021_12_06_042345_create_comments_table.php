@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMemosTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateMemosTable extends Migration
      */
     public function up()
     {
-        Schema::create('memos', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->longText('content');
-            $table->integer('user_id');
-            $table->integer('status')->default('1');
+            $table->longText('comment');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('article_id')->constrained();
             $table->timestamp('updated_at')->useCurrent()->nullable;
             $table->timestamp('created_at')->useCurrent()->nullable;
         });
@@ -30,6 +30,6 @@ class CreateMemosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('memos');
+        Schema::dropIfExists('comments');
     }
 }

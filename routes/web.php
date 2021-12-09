@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 //記事に飛ぶようにする
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,26 @@ use App\Http\Controllers\PostController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/' , [App\Http\Controllers\PostController::class, 'home'])->name('home');
+// Route::get('/' , [App\Http\Controllers\PostController::class, 'home'])->name('home');
 Route::get('/posts/mypost' , [App\Http\Controllers\PostController::class, 'mypost'])->name('mypost');
 Route::resource('posts', PostController::class);
+Route::resource('comments', CommentController::class);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('posts', PostController::class);
+
 //get=ウェブのブラウザからアクセスしに行く //post＝データを投げる
 // Route::get('/welcome' , [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
 // Route::get('/drafts/new', [App\Http\Controllers\HomeController::class, 'new'])->name('new');
@@ -33,21 +51,6 @@ Route::resource('posts', PostController::class);
 // //PostControllerの中にmethod
 // //どのmethodを呼ぶのかも書いておく
 // //routingはurl決めるところ
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('posts', PostController::class);
 
 //view　ホール
 //Controller　ホールとキッチンをつなぐ人
