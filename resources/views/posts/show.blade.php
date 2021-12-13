@@ -1,5 +1,4 @@
-記事詳細
-{{-- {{ dd($post) }} --}}
+記事記事
 <p>{{$article["content"]}}</p>
 <form method='GET' action="/posts/{{$article['id'] }}">
     @csrf

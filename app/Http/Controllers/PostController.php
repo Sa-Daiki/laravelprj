@@ -8,21 +8,6 @@ use App\Models\Comment;
 
 class PostController extends Controller
 {
-    public function mypost()
-    {
-        $user = \Auth::user();
-        if($user != null){
-         $posts = Article:: where('user_id', $user['id'])
-                                ->where('status', 1)
-                                ->orderBy('updated_at', 'ASC')
-                                ->get();
-            return view('/posts/mypost', compact('user', 'posts'));
-     }
-        else{
-                return view('/posts');
-        }
-    }
-
     public function index()
     {
         $user = \Auth::user();
@@ -47,7 +32,9 @@ class PostController extends Controller
     {
             $data = $request -> all();
             $memo_id = Article::create([
-                'title'=>'title', 'content' => $data['content'], 'user_id' => $data['user_id']
+                'title'=>'title',
+                'content' => $data['content'],
+                'user_id' => $data['user_id']
             ]);
             return redirect() -> route('posts.index');
     }

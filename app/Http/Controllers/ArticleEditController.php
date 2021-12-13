@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comment;
+use App\Models\Article;
 
-class CommentController extends Controller
+class ArticleEditController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,18 @@ class CommentController extends Controller
      */
     public function index()
     {
-
+        $user = \Auth::user();
+        // dd($user);
+        if($user != null){
+            $posts = Article:: where('user_id', $user['id'])
+            ->where('status', 1)
+            ->orderBy('updated_at', 'ASC')
+            ->get();
+            return view('/edits', compact('user', 'posts'));
+     }
+        else{
+                return view('/posts');
+        }
     }
 
     /**
@@ -24,7 +35,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -35,12 +46,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $article_id = Comment::create([
-            'comment' => $request -> comment,
-            'article_id' => $request -> article_id,
-            'user_id' => $request->user()->id
-        ]);
-        return redirect-> route('posts.show');
+        //
     }
 
     /**
