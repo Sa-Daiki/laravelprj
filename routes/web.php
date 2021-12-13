@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ArticlePEditController;
+use App\Http\Controllers\ArticleEditController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,7 @@ use App\Http\Controllers\ArticlePEditController;
 */
 Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class);
-Route::resource('edits', EditController::class);
+Route::resource('article_edits', ArticleEditController::class);
 
 
 Auth::routes();

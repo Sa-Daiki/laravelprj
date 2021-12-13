@@ -35,12 +35,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $article_id = Comment::create([
+        $comment = Comment::create([
             'comment' => $request -> comment,
             'article_id' => $request -> article_id,
             'user_id' => $request->user()->id
         ]);
-        return redirect-> route('posts.show');
+        return back()->withInput(); ///////////////////////////////////////////////
     }
 
     /**
@@ -49,18 +49,17 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
-    }
-
+     }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         //
     }

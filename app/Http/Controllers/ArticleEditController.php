@@ -15,14 +15,13 @@ class ArticleEditController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        // dd($user);
         if($user != null){
             $posts = Article:: where('user_id', $user['id'])
             ->where('status', 1)
             ->orderBy('updated_at', 'ASC')
             ->get();
-            return view('/edits', compact('user', 'posts'));
-     }
+        return view('/edits', compact('user', 'posts'));
+        }
         else{
                 return view('/posts');
         }
@@ -55,7 +54,7 @@ class ArticleEditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
     }

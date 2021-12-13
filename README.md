@@ -14,3 +14,4 @@ https://dev83.com/laravel-change-column-setting/
 already exist の時にfreshしたらなぜか治る時がある理由が分からなかった
 タイムスタンプの書き方　？
 laravelベストプラクティスみながら
+returnに型付けたほういい
