@@ -73,7 +73,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request -> all();
+        Comment::where('id', $id)
+        ->update(['comment' => $inputs['comment'] ]);
+        return back()->withInput();
     }
 
     /**

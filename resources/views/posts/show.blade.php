@@ -10,9 +10,22 @@
 
     @foreach($comments as $comment)
     <p>{{ $comment["comment"] }}</p>
+
+    <form method='POST' action="/comments/{{$comment['id']}}">
+        @csrf
+        @method('put')
+        <input type='hidden' name='user_id' value="{{ $article['id'] }}">
+        <textarea name='comment'>
+            {{ $comment['comment'] }}
+        </textarea>
+        <button type='submit'>更新</button>
+    </form>
+
+    </form>
     <form method='POST' action="/comments/{{$comment['id']}}">
         @csrf
         @method('delete')
         <button type='submit'>削除</button>
     </form>
+
     @endforeach

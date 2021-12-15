@@ -28,7 +28,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request -> all();
         $article_id = Article::create([
             'title' => $request->title,
             'content' => $request->content,
@@ -68,9 +67,10 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $inputs = $request -> all();
-        Article::where('id', $id)
-        ->update(['content' => $inputs['content'] ]);
+        Article::where('id', $id)->update([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
         return redirect() -> route('posts.index');
     }
 
@@ -80,5 +80,4 @@ class PostController extends Controller
         ->delete();
         return redirect() -> route('posts.index');
     }
-
 };

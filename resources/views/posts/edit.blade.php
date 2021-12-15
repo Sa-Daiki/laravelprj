@@ -2,7 +2,9 @@
 <form method='POST' action="/posts/{{$post['id']}}">
     @csrf
     @method('put')
-    <input type='hidden' name='user_id' value="{{ $user['id'] }}">
+    <textarea name='title'>
+        {{ $post['title'] }}
+    </textarea>
     <textarea name='content'>
         {{ $post['content'] }}
     </textarea>
