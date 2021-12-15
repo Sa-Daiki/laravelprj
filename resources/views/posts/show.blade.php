@@ -4,7 +4,7 @@
 <form method='POST' action="/comments">
     @csrf
     <input type="hidden" name="article_id" value="{{ $article['id']}}">
-    <textarea name="comment" rows="10" cols="50"></textarea>
+    <textarea name="comment" rows="3" cols="50"></textarea>
     <input type="submit" name="submit" value="投稿">
     @foreach($comments as $comment)
         <p>{{ $comment["comment"] }}</p>

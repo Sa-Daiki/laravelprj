@@ -40,7 +40,7 @@ class CommentController extends Controller
             'article_id' => $request -> article_id,
             'user_id' => $request->user()->id
         ]);
-        return back()->withInput(); ///////////////////////////////////////////////
+        return back()->withInput();
     }
 
     /**

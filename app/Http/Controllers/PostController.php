@@ -46,7 +46,7 @@ class PostController extends Controller
         if($user != null){
         $article = Article::where('id', $id)->first();
         $comments = Comment::orderBy('updated_at', 'ASC')
-        ->take(20)
+        ->where('article_id', $article['id'])
         ->get();
         return view('posts/show', compact('user', 'article', 'comments'));}
         else{
