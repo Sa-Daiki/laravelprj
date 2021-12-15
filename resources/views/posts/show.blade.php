@@ -6,7 +6,13 @@
     <input type="hidden" name="article_id" value="{{ $article['id']}}">
     <textarea name="comment" rows="3" cols="50"></textarea>
     <input type="submit" name="submit" value="投稿">
-    @foreach($comments as $comment)
-        <p>{{ $comment["comment"] }}</p>
-    @endforeach
 </form>
+
+    @foreach($comments as $comment)
+    <p>{{ $comment["comment"] }}</p>
+    <form method='POST' action="/comments/{{$comment['id']}}">
+        @csrf
+        @method('delete')
+        <button type='submit'>削除</button>
+    </form>
+    @endforeach

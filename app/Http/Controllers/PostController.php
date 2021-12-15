@@ -14,7 +14,7 @@ class PostController extends Controller
         $keyword = $request -> keyword;
         $query = Article::query();
         if(!empty($keyword)){
-            $posts = $query->where('title', 'like', $keyword . '%');
+            $posts = $query->where('title', 'like', $keyword . '%')->orWhere('content', 'like', $keyword . '%');
         }
         $posts = $query -> orderBy('updated_at', 'Asc')->paginate(10);
         return view('/posts', compact('posts'));

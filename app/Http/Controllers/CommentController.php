@@ -14,7 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -82,11 +82,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $inputs = $request -> all();
-        Comment::where('id', $id)
-        ->delete();
+        Comment::where('id', $id)->delete();
         return back()->withInput();
     }
 }
