@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html　lang="ja">
+<html lang="ja">
 <head>
     <meta charset="utf-8" />
     <title>@yield('title') -Qiita</title>
@@ -10,6 +10,14 @@
 </head>
 <body>
     <header>
+        <div class="col-sm-4" style="padding:20px 0; padding-left:0px;">
+            <form method='GET' class="form-inline" action="/posts">
+                <div class="form-group">
+                <input type="text" name="keyword" class="form-control" placeholder="キーワードを検索">
+                </div>
+              <input type="submit" name="submit" value="検索" class="btn btn-info">
+            </form>
+        </div>
         <details>
             <summary>Qiita</summary>
             <div>ログイン中のQuitta Team</div>
@@ -29,8 +37,6 @@
                 <li><a href=''>Qiita Blog</a></li>
             </ul>
         </details>
-            <input type="text" name="text" value="キーワードを入力">
-            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest

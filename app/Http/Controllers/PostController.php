@@ -9,18 +9,15 @@ use App\Models\Comment;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = \Auth::user();
-        if($user != null){
-            $posts = Article::orderBy('updated_at', 'ASC')
-            ->take(20)
-            ->get();
-            return view('/posts', compact('user', 'posts'));
+        $keyword = $request -> keyword;
+        $query = Article::query();
+        if(!empty($keyword)){
+            $posts = $query->where('title', 'like', $keyword . '%');
         }
-        else{
-            return view('posts/home');
-        }
+        $posts = $query -> orderBy('updated_at', 'Asc')->paginate(10);
+        return view('/posts', compact('posts'));
     }
 
      public function create()
@@ -40,13 +37,13 @@ class PostController extends Controller
         return redirect() -> route('posts.index');
     }
 
-    public function show(int $id)
+    public function show($id)
     {
         $user = \Auth::user();
         if($user != null){
         $article = Article::where('id', $id)->first();
         $comments = Comment::orderBy('updated_at', 'ASC')
-        ->where('article_id', $article['id'])
+        ->where('article_id', $article->id)
         ->get();
         return view('posts/show', compact('user', 'article', 'comments'));}
         else{

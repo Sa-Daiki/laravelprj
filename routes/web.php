@@ -17,6 +17,7 @@ use App\Http\Controllers\ArticleEditController;
 Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class);
 Route::resource('article_edits', ArticleEditController::class);
+Route::resource('searches', ArticleEditController::class);
 
 
 Auth::routes();

@@ -7,5 +7,5 @@
 <p>ホーム</p>
 @foreach($posts as $post)
             <a href="/posts/{{ $post['id'] }}">{{ $post['title'] }}</a> {{--/postsのページに投稿一覧を出してる--}}
-            @endforeach
+@endforeach
 @endsection

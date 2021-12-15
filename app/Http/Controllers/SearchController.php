@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Article;
 use App\Models\Comment;
 
-class CommentController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        //
     }
 
     /**
@@ -24,7 +25,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -35,12 +36,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = Comment::create([
-            'comment' => $request -> comment,
-            'article_id' => $request -> article_id,
-            'user_id' => $request->user()->id
-        ]);
-        return back()->withInput();
+        //
     }
 
     /**
@@ -49,17 +45,18 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
         //
-     }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit($id)
     {
         //
     }
@@ -82,11 +79,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $inputs = $request -> all();
-        Comment::where('id', $id)
-        ->delete();
-        return back()->withInput();
+        //
     }
 }
