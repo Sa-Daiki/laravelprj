@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'article';
     protected $fillable = [
         'title', 'content', 'status', 'user_id'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

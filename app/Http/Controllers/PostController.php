@@ -38,13 +38,15 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $article = Article::find($id);
+        $userName = $article->user->name;
         $user = \Auth::user();
         if($user != null){
-        $article = Article::where('id', $id)->first();
         $comments = Comment::orderBy('updated_at', 'ASC')
         ->where('article_id', $article->id)
         ->get();
-        return view('posts/show', compact('user', 'article', 'comments'));}
+        // dd($comments);
+        return view('posts/show', compact('user', 'article', 'comments', 'userName'));}
         else{
             return view('/posts');
         }
@@ -53,8 +55,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $user = \Auth::user();
-        $post = Article::where('status', 1)
-        ->where('id', $id)
+        $post = Article::find($id)
+        ->where('status', 1)
         ->where('user_id', $user['id'])
         ->first();
         $posts = Article::where('user_id', $user['id'])
@@ -67,9 +69,9 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        Article::where('id', $id)->update([
-            'title' => $request->title,
-            'content' => $request->content
+        Article::find($id)->update([
+        'title' => $request->title,
+        'content' => $request->content
         ]);
         return redirect() -> route('posts.index');
     }

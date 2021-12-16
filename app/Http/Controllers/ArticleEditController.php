@@ -15,16 +15,8 @@ class ArticleEditController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        if($user != null){
-            $posts = Article:: where('user_id', $user['id'])
-            ->where('status', 1)
-            ->orderBy('updated_at', 'ASC')
-            ->get();
+        $posts = $user->article()->orderBy('updated_at', 'ASC')->paginate();
         return view('/edits', compact('user', 'posts'));
-        }
-        else{
-                return view('/posts');
-        }
     }
 
     /**
