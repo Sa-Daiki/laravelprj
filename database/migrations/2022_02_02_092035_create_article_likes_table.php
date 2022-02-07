@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticleTagsTable extends Migration
+class CreateArticleLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateArticleTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tags', function (Blueprint $table) {
+        Schema::create('article_likes', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('article_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('tag_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->primary(['article_id', 'tag_id']);
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateArticleTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_tags');
+        Schema::dropIfExists('article_likes');
     }
 }

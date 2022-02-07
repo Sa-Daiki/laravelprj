@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\ArticleLike;
 
-class ArticleEditController extends Controller
+class ArticleLikeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = auth()->user();
-        $posts = $user->article()->orderBy('updated_at', 'ASC')->paginate();
-        return view('/edits', compact('user', 'posts'));
+
     }
 
     /**
@@ -26,9 +24,10 @@ class ArticleEditController extends Controller
      */
     public function create()
     {
-        //
+        $user = auth()->user();
+       {
+        }
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +36,15 @@ class ArticleEditController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+        if(ArticleLike::where('user_id', $request->user()->id)->where('article_id', $request->article_id)->exists()){
+            ArticleLike::where('user_id', $request->user()->id)->where('article_id', $request->article_id)->delete();
+        }else{
+                ArticleLike::create([
+                    'article_id' => $request->article_id,
+                    'user_id' => $request->user()->id
+                ]);}
+        return redirect('/posts/'.$request->article_id);
     }
 
     /**
@@ -46,9 +53,9 @@ class ArticleEditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
-        //
+        
     }
 
     /**

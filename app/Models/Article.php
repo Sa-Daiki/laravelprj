@@ -14,4 +14,20 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, ArticleTags::class);
+    }
+
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        return $query -> where('title', 'like', $keyword . '%')->orWhere('content', 'like', $keyword . '%');
+    }
+
+    public function scopeOrderByUpdated($query, $order='desc')
+    {
+        return $query->orderBy('updated_at', $order);
+    }
 }
+

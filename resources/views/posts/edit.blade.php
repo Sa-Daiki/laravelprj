@@ -15,3 +15,4 @@
     @method('delete')
     <button type='submit'>削除</button>
 </form>
+<a href="/posts">ホームへ</a>

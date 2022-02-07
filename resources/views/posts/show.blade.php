@@ -1,14 +1,23 @@
-記事記事
+記事
 <p>{{$userName}}</p>
 <p>タイトル：{{$article["title"]}}</p>
-<p>{{$article["content"]}}</p>
+<p>内容：{{$article["content"]}}</p>
+
+@foreach($tags as $tag)
+<a href="/tags/{{ $tag['id'] }}">タグ：{{$tag["title"]}}</a>
+@endforeach
 <form method='POST' action="/comments">
     @csrf
     <input type="hidden" name="article_id" value="{{ $article['id']}}">
     <textarea name="comment" rows="3" cols="50"></textarea>
     <input type="submit" name="submit" value="投稿">
 </form>
-
+<form method='POST' action="/article_likes">
+    @csrf
+    <input type='hidden' name='article_id' value="{{ $article['id']}}">
+    <button type='submit'>LGTM</button>
+    <p>いいね数：{{$count}}</p>
+</form>
     @foreach($comments as $comment)
     <p>{{ $comment["comment"] }}</p>
 
@@ -32,5 +41,6 @@
         <button type='submit'>削除</button>
         @endif
     </form>
-
     @endforeach
+    <a href="/posts">ホームへ</a>
+
