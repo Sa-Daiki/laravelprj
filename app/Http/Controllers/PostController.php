@@ -33,7 +33,7 @@ class PostController extends Controller
         $article = Article::create([
             'title' => $request->title,
             'content' => $request->content,
-            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id,
         ]);
         $article -> tags() -> sync([$tagId]);
         return redirect() -> route('posts.index');
@@ -47,12 +47,12 @@ class PostController extends Controller
         $count = ArticleLike::where('article_id', $id)->count();
          $comments = Comment::orderBy('updated_at', 'ASC')->where('article_id', $article->id)->get();
         $tags = $article->tags;
-        return view('posts.show', compact('article', 'comments', 'userName', 'tags', 'count'));
+        return view('posts.show', compact('article', 'comments', 'userName', 'tags', 'count', 'user'));
     }
 
     public function edit($id)
     {
-        $user = auth()->user();;
+        $user = Auth()->user();
         $post = Article::find($id)
         ->where('status', 1)
         ->where('user_id', $user['id'])

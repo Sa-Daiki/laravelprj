@@ -1,4 +1,4 @@
-@foreach($posts as $post)
-            <a href="/posts/{{ $post['id'] }}/edit">{{ $post['title'] }}</a>
+@foreach($article as $article)
+            <a href="/posts/{{ $article['id'] }}/edit">{{ $article['title'] }}</a>
 @endforeach
 <a href="/posts">ホームへ</a>

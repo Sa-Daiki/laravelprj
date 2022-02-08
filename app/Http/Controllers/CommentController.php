@@ -35,7 +35,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = Comment::create([
+        Comment::create([
             'comment' => $request -> comment,
             'article_id' => $request -> article_id,
             'user_id' => $request->user()->id
@@ -46,7 +46,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id’
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)

@@ -55,7 +55,7 @@ class ArticleLikeController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
