@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Article;
 use App\Models\ArticleLike;
 use App\Models\Comment;
@@ -27,7 +27,7 @@ class PostController extends Controller
         return view('posts.create', compact('tags'));
     }
 
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
         $tagId  = $request -> tags_id;
         $article = Article::create([
@@ -65,7 +65,7 @@ class PostController extends Controller
         return view('posts.edit', compact('user', 'post', 'posts'));
     }
 
-    public function update(Request $request, $id)
+    public function update(PostStoreRequest $request, $id)
     {
         Article::find($id)->update([
         'title' => $request->title,
