@@ -3,7 +3,7 @@
 <input type='text' value="タイトル">
 <input type='text' value="知識に関連するタグをスペース区切りで５つまで入力（例: Ruby Rails">
 <p>作成画面</p>
-<form method='POST' action="/drafts/store">{{-- データを入れるときはPostメソッドを使う --}}
+<form method='POST' action="/drafts/store">
     @csrf{{--ユーザー乗っ取り対策--}}
     <input type="hidden" name="user_id"value="{{ $user['id']}}">{{-- $userの中の、idを取り出すという意味--}}
     <textarea name="content" rows="10" cols="50"></textarea>
@@ -22,3 +22,4 @@
 {{-- 画面から、content, user_id, statusを入れてあげることが大切 --}}
 
 {{-- 選択したoptionごとに違うページに遷移するようにするにはどうすればいい？ --}}
+

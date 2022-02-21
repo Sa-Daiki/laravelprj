@@ -1,18 +1,18 @@
 <p>編集画面</p>
-<form method='POST' action="/posts/{{$post['id']}}">
+<form method='POST' action="/articles/{{$article['id']}}">
     @csrf
     @method('put')
     <textarea name='title'>
-        {{ $post['title'] }}
+        {{ $article['title'] }}
     </textarea>
     <textarea name='content'>
-        {{ $post['content'] }}
+        {{ $article['content'] }}
     </textarea>
     <button type='submit'>更新</button>
 </form>
-<form method='POST' action="/posts/{{$post['id']}}">
+<form method='article' action="/articles/{{$article['id']}}">
     @csrf
     @method('delete')
     <button type='submit'>削除</button>
 </form>
-<a href="/posts">ホームへ</a>
+<a href="/articles">ホームへ</a>

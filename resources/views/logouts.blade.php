@@ -1,2 +1,2 @@
-<h1>ログアウトしました</h1>
-<a href="/posts">ホームへ</a>
+<h1></h1>
+<a href="/articles">ホームへ</a>

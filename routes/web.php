@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ArticleEditController;
 use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\LogoutController;
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +20,14 @@ use App\Http\Controllers\LogoutController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('posts', PostController::class);
-Route::resource('comments', CommentController::class)->middleware('auth');
+Route::resource('articles', ArticleController::class);
 Route::resource('article_edits', ArticleEditController::class)->middleware('auth');
 Route::resource('article_likes', ArticleLikeController::class)->middleware('auth');
+Route::resource('comments', CommentController::class)->middleware('auth');
+Route::resource('photos', PhotoController::class);
+Route::resource('questions', QuestionController::class);
+Route::resource('tags', TagController::class);
 Route::resource('users', UserController::class);
-
 
 Auth::routes();
 

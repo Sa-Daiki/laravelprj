@@ -40,7 +40,7 @@ class CommentControllerTest extends TestCase
             'user_id' => $user1->id,
         ]);
         $response = $this->actingAs($user2)
-                                  ->putJson("/posts/$article->id", [
+                                  ->putJson("/articles/$article->id", [
             'title'=>'タイトル',
             'content'=>'内容',
         ]);

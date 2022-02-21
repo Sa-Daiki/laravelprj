@@ -9,122 +9,245 @@
     <script src="{{ asset('js/pp.js') }}"></script>
 </head>
 <body>
-    <header>
-        <div class="col-sm-4" style="padding:20px 0; padding-left:0px;">
-            <form method='GET' class="form-inline" action="/posts">
-                <div class="form-group">
-                <input type="text" name="keyword" class="form-control" placeholder="キーワードを検索">
-                </div>
-              <input type="submit" name="submit" value="検索" class="btn btn-info">
-            </form>
-        </div>
-        <details>
-            <summary>Qiita</summary>
-            <div>ログイン中のQuitta Team</div>
-            <div>ログイン中のチームがありません</div>
-            <a href=''>Quitta Teamにログイン</a>
-            <ul class="community">
-                <li>コミュニティ</li>
-                <li><a href=''>Organization</a></li>
-                <li><a href=''>イベント</a></li>
-                <li><a href=''>アドベントカレンダー</a></li>
-                <li><a href=''>Qiitadon(β)</a></li>
-            </ul>
-            <ul>
-                <li>サービス</li>
-                <li><a href=''>Qiita Job</a></li>
-                <li><a href=''>Qiita Zine</a></li>
-                <li><a href=''>Qiita Blog</a></li>
-            </ul>
-        </details>
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('ユーザー登録') }}</a>
-                        </li>
-                    @endif
-                @else
-                    {{-- <li class="nav-item dropdown"> --}}
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type='submit'>ログアウト</button>
+    <div class="footerFixed">
+        <div class="body">
+            <header>
+                    @yield('header')
+                    <div class="header-top">
+                        <a href="/articles"class="title">Qiita</a>
+                        <form method='GET' action="/articles">
+                            <input type="text" name="keyword" class="form-keyword" placeholder="キーワードを検索">
+                            <a type="submit"></a>
                         </form>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-
-
-                        </div>
-                    {{-- </li> --}}
-                @endguest
-            </ul>
+                                @guest
+                                    @if (Route::has('login'))
+                                            <a class="user-login" href="{{ route('login') }}">{{ __('ログイン') }}</a>
+                                    @endif
+                                    @if (Route::has('register'))
+                                            <a class="user-register" href="{{ route('register') }}">{{ __('ユーザー登録') }}</a>
+                                    @endif
+                                    @else
+                                        <div class="menuparent">
+                                            <button type='button' class="openusermenu" onclick="openUserMenu()">
+                                                {{ Str::substr(Auth::user()->name,0,1) }}
+                                            </button>
+                                            <ul class="usermenu" id="usermenu">
+                                                <li><a href="">マイページ</a></li>
+                                                <li><a>ストックした記事</a></li>
+                                                <li><a href="/articles/create">新規投稿（記事）</a></li>
+                                                <li><a>新規投稿（質問）</a></li>
+                                                <li><a>下書き記事</a></li>
+                                                <li><a>限定共有記事</a></li>
+                                                <li><a>編集リクエスト</a></li>
+                                                <li><a>設定</a></li>
+                                                <li>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                        @csrf
+                                                        <button type='submit'>ログアウト</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{{ route('logout') }} method='POST'>
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                            <a href="/articles/create" class="post">投稿する</a>
+                                @endguest
+                    </div>
+                    <div class="header-bottom">
+                            <a href="/articles" class="header-bottom-item header-home">ホーム</a>
+                            <a class="header-bottom-item " >タイムライン</a>
+                            <a class="header-bottom-item">トレンド</a>
+                            <a class="header-bottom-item">質問</a>
+                            <a class="header-bottom-item">Organization</a>
+                            <a class="header-bottom-item">イベント</a>
+                            <a class="header-bottom-item">Qiita Blog</a>
+                    </div>
+            </header>
+            <div class=article>
+                @yield('content')
+                @yield('tagcontent')
+                @yield('show')
+                @yield('create')
+            </div>
         </div>
+        <footer>
+            <div>
+                <a href="/articles"class="title" >Qiita</a>
+                <p>How developers code is here.</p>
+                <p>© 2011-2021 Increments Inc.</p>
+            </div>
+        </footer>
     </div>
-</nav>
-
-<main class="py-4">
-    @yield('content')
-    @yield('home')
-    @yield('draft')
-    @yield('edit')
-</main>
-</div>
-    </header>
-
-    <footer>
-        <div>
-            <h1>Qitta</h1>
-            <p>How developers code is here.</p>
-            <ul class="follow-me">
-                <li><a href="https://twitter.com"></a></li>
-                <li><a href="https://www.facebook.com"></a></li>
-                <li><a href="/feed"></a></li>
-            </ul>
-            <p>© 2011-2021 Increments Inc.</p>
-        </div>
-        <div>
-            <p>Qiita</p>
-            <a href=''>About</a>
-            <a href=''>利用規約</a>
-            <a href=''>プライバシー</a>
-            <a href=''>ガイドライン</a>
-            <a href=''>デザインガイドライン</a>
-            <a href=''>リリース</a>
-            <a href=''>API</a>
-            <a href=''>ご意見</a>
-            <a href=''>ヘルプ</a>
-            <a href=''>広告掲載</a>
-        </div>
-        <div>
-            <p>Increments</p>
-            <a href=''>About</a>
-            <a href=''>採用情報</a>
-            <a href=''>ブログ</a>
-            <a href=''>Qiita Team</a>
-            <a href=''>Qiita Jobs</a>
-            <a href=''>Qiita Zine</a>
-        </div>
-        @yield('footer')
-    </footer>
-
 </body>
+
+<style type="text/css">
+.footerFixed{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+}
+        header{
+            height: 90px;
+            margin: 0 auto;
+            padding :5px 8%;
+            background-color: #55c500;
+            color: #fff;
+            width: 100%;
+        }
+
+        body{
+            background: #EEEEEE;
+        }
+
+        .header-top{
+            display: flex;
+            align-items: flex-start;
+            height: 40px;
+            top: 5px;
+        }
+
+        .title{
+            color:#fff;
+            height: 40px;
+            font-size: 30px;
+            flex-basis: 65%;
+        }
+
+        .form-keyword{
+            height :40px;
+            width :340px;
+            border-style: solid;
+            border-width: 2px;
+            border-color:white;
+            flex-basis: 25%;
+        }
+
+        .post{
+            border-radius : 5%;
+            font-size     : 10pt;
+            text-align    : center;
+            cursor        : pointer;
+            padding       : 10px 5px;
+            background    : #006633;
+            color         : #ffffff;
+            height: 40px;
+            width: 80px;
+            margin-left: 10px;
+        }
+    }
+
+    .openusermenu{
+        background: green;
+        color          : #ffffff;
+        border-radius: 50%;
+        width         :30px;
+        height        :30px;
+        text-align    : center;
+        flex-basis: 3%;
+        margin: 10px;
+    }
+
+    .usermenu{
+        list-style-type: none;
+        background:#fff;
+        color:black;
+        position:absolute;
+        width: 210px;
+        flex-basis: 7%;
+    }
+
+    .userparent{
+        position: relative;
+    }
+
+    li{
+        padding: 10px;
+    }
+
+    .user-login{
+        border-radius : 5%;
+        flex-basis: 8%;
+        font-size     : 10pt;
+        text-align    : center;
+        cursor        : pointer;
+        padding       : 12px 12px;
+        color         : #ffffff;
+        height:40px;
+        width:80px;
+        top: 4px;
+        left: 520px;
+    }
+
+    .user-register{
+        border-radius : 5%;
+        font-size     : 10pt;
+        text-align    : center;
+        cursor        : pointer;
+        padding       : 10px 5px;
+        border-color : #ffffff;
+        border-style: solid;
+        border-width: 2px;
+        color         : #ffffff;
+        height:40px;
+        width: 100px;
+        flex-basis: 8%;
+    }
+
+    .header-bottom{
+        height: 40px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .header-bottom-item{
+        padding: 8px 12px;
+        color: white;
+        height: 40px;
+    }
+
+    .header-home{
+        padding-left: 0;
+    }
+
+    .article{
+        background: #EEEEEE;
+        height: auto;
+        margin-bottom: 360px;
+    }
+
+     footer{
+    padding :10px 90px;
+    color: #ffffff;
+    background-color: #3D4040;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 400px;
+    margin-top: auto;
+     }
+
+</style>
+
+<script>
+    document.getElementById("usermenu").style.display ="none";
+    // function openUserMenu(){
+    //     document.getElementById("usermenu").style.display = 'block';
+    // }
+    function openUserMenu(){
+	const usermenu = document.getElementById("usermenu");
+	if(usermenu.style.display=="block"){
+		usermenu.style.display ="none";
+	}else{
+		usermenu.style.display ="block";
+	}
+}
+</script>

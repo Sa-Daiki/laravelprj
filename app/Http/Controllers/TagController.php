@@ -48,8 +48,8 @@ class TagController extends Controller
     public function show($id)
     {
         $tag = Tag::find($id);
-        $articles = $tag -> articles;
-        return view('tags/show', compact('tag', 'articles'));
+        $articles = $tag->articles;
+        return view('tags.show', compact('tag', 'articles'));
     }
 
     /**

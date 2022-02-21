@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostStoreRequest extends FormRequest
+class ArticleLikeStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,18 +21,16 @@ class PostStoreRequest extends FormRequest
      *
      * @return array
      */
-
     public function rules()
     {
         return [
-            'title'=>'required|string|max:20',
-            'content'=>'required',
+            
         ];
     }
 
     public function messages() {
         return [
-        "title" => "必須項目です。",
+        "required" => "必須項目です。",
         ];
     }
 

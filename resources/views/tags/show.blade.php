@@ -1,5 +1,6 @@
-
-記事
+@extends('layouts.layout')
+@section('tagcontent')
 @foreach($articles as $article)
-<a href="/posts/{{ $article['id'] }}">{{$article['title']}}</a>
+<a href="/articles/{{ $article['id'] }}">{{$article['title']}}</a>
 @endforeach
+@endsection
