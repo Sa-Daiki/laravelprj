@@ -12,18 +12,13 @@ use App\Models\User;
 
 class ArticleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Article::class, '');
-    // }
-
     public function index(Request $request)
     {
-        $keyword = $request -> keyword;
-        if(!empty($keyword)){
+        $keyword = $request->keyword;
+        if (!empty($keyword)) {
             $articles = Article::searchByKeyword($keyword);
         }
-        
+
         $articles = Article::with('user', 'tags')->searchByKeyword($keyword)->orderByUpdated()->paginate(15);
         $articles->map(function ($article) {
             $article['count'] = ArticleLike::where('article_id', $article->id)->count();
@@ -32,7 +27,7 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles'));
     }
 
-     public function create()
+    public function create()
     {
         $tags = Tag::get();
         return view('articles.create', compact('tags'));
@@ -40,14 +35,14 @@ class ArticleController extends Controller
 
     public function store(ArticleStoreRequest $request)
     {
-        $tagId  = $request -> tags_id;
+        $tagId  = $request->tags_id;
         $article = Article::create([
             'title' => $request->title,
             'content' => $request->content,
             'user_id' => $request->user()->id,
         ]);
         $article->tags()->sync([$tagId]);
-        return redirect() -> route('articles.index')->with('message', '投稿を作成しました');
+        return redirect()->route('articles.index')->with('message', '投稿を作成しました');
     }
 
     public function show($id)
@@ -65,31 +60,31 @@ class ArticleController extends Controller
     {
         $user = Auth()->user();
         $article = Article::find($id)
-        ->where('status', 1)
-        ->where('user_id', $user['id'])
-        ->first();
+            ->where('status', 1)
+            ->where('user_id', $user['id'])
+            ->first();
         $articles = Article::where('user_id', $user['id'])
-        ->where('status', 1)
-        ->orderBy('updated_at', 'DESC')
-        ->take(20)
-        ->get();
+            ->where('status', 1)
+            ->orderBy('updated_at', 'DESC')
+            ->take(20)
+            ->get();
         return view('articles.edit', compact('user', 'article', 'articles'));
     }
 
     public function update(ArticleStoreRequest $request, $id)
     {
         Article::find($id)->update([
-        'title' => $request->title,
-        'content' => $request->content
+            'title' => $request->title,
+            'content' => $request->content
         ]);
-        return redirect() -> route('articles.index');
+        return redirect()->route('articles.index');
     }
 
-    public function destroy(Request $request, $id){
-        $inputs = $request -> all();
+    public function destroy(Request $request, $id)
+    {
+        $inputs = $request->all();
         Article::where('id', $id)
-        ->delete();
-        return redirect() -> route('articles.index');
+            ->delete();
+        return redirect()->route('articles.index');
     }
-
 };

@@ -9,26 +9,6 @@ use App\Http\Requests\CommentStoreRequest;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,34 +17,12 @@ class CommentController extends Controller
     public function store(CommentStoreRequest $request)
     {
         Comment::create([
-            'comment' => $request -> comment,
-            'article_id' => $request -> article_id,
+            'comment' => $request->comment,
+            'article_id' => $request->article_id,
             'user_id' => $request->user()->id
         ]);
         return back()->withInput();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id’
-     * @return \Illuminate\Http\Response
-     */
-    public function show(int $id)
-    {
-        //
-     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(int $id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -74,9 +32,9 @@ class CommentController extends Controller
      */
     public function update(CommentStoreRequest $request, $id)
     {
-        $inputs = $request -> all();
+        $inputs = $request->all();
         Comment::find($id)
-        ->update(['comment' => $inputs['comment'] ]);
+            ->update(['comment' => $inputs['comment']]);
         return back()->withInput();
     }
 

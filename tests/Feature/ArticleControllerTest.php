@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class PostControllerTest extends TestCase
+class ArticleControllerTest extends TestCase
 {
     use RefreshDatabase;
     /**
@@ -23,7 +23,7 @@ class PostControllerTest extends TestCase
         $article = Article::factory()->create([
             'user_id' => $user->id,
         ]);
-        $response = $this->get('/posts');
+        $response = $this->get('/articles');
         $response->assertSeeText($article->title);
         $response->assertStatus(200);
     }
@@ -32,10 +32,10 @@ class PostControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $tag = Tag::factory()->create();
-        $response = $this->actingAs($user)->postJson('/posts', [
-            'tags_id'=>$tag->id,
-            'title'=>'タイトル',
-            'content'=>'内容',
+        $response = $this->actingAs($user)->postJson('/articles', [
+            'tags_id' => $tag->id,
+            'title' => 'タイトル',
+            'content' => '内容',
         ]);
         $response->assertStatus(302);
     }
@@ -45,7 +45,7 @@ class PostControllerTest extends TestCase
     //     $user = User::factory()->create();
     //     $tag = Tag::factory()->create();
     //     $response = $this->actingAs($user)
-    //                               ->postJson('/posts', [
+    //                               ->postJson('/articles', [
     //         'tags_id'=>$tag->id,
     //         'title'=>null,
     //         'content'=>'内容',
@@ -55,7 +55,7 @@ class PostControllerTest extends TestCase
 
     public function testCreate()
     {
-        $response = $this->get('/posts/create');
+        $response = $this->get('/articles/create');
         $response->assertStatus(200);
     }
 
@@ -65,7 +65,7 @@ class PostControllerTest extends TestCase
         $article = Article::factory()->create([
             'user_id' => $user->id,
         ]);
-        $response = $this->get("/posts/$article->id");
+        $response = $this->get("/articles/$article->id");
         $response->assertStatus(200);
     }
 
@@ -76,10 +76,10 @@ class PostControllerTest extends TestCase
             'user_id' => $user->id,
         ]);
         $response = $this->actingAs($user)
-                                  ->putJson("/posts/$article->id", [
-            'title'=>'タイトル',
-            'content'=>'内容',
-        ]);
+            ->putJson("/articles/$article->id", [
+                'title' => 'タイトル',
+                'content' => '内容',
+            ]);
         $this->assertDatabaseHas('articles', [
             'title' => 'タイトル',
             'content' => '内容',
@@ -97,19 +97,22 @@ class PostControllerTest extends TestCase
             'title' => $article->title,
             'content' => $article->content,
             'user_id' => $article->id,
+            'status' => $article->status,
+            'updated_at' => $article->updated_at,
+            'created_at' => $article->created_at,
+            'user_id' => $article->user_id
         ]);
-        $response = $this->actingAs($user)->delete("/posts/$article->id");
+        $response = $this->actingAs($user)->delete("/articles/$article->id");
         $response->assertStatus(302);
     }
 
     public function testEdit()
     {
-        $user= User::factory()->create();
+        $user = User::factory()->create();
         $article = Article::factory()->create([
             'user_id' => $user->id,
         ]);
-        $response = $this->actingAs($user)->get("/posts/$article->id/edit");
+        $response = $this->actingAs($user)->get("/articles/$article->id/edit");
         $response->assertStatus(200);
     }
-
 }

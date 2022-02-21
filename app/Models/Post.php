@@ -11,9 +11,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-
-    ];
+    protected $fillable = [];
 }
 
 //テーブルは複数形、モデルは単数形で命名

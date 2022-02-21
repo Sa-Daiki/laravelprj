@@ -25,15 +25,15 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|string|max:20',
-            'content'=>'required',
+            'title' => 'required|string|max:20',
+            'content' => 'required',
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
-        "title" => "必須項目です。",
+            "title" => "必須項目です。",
         ];
     }
-
 }

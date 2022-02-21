@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,12 +24,11 @@ class Article extends Model
 
     public function scopeSearchByKeyword($query, $keyword)
     {
-        return $query -> where('title', 'like', $keyword . '%')->orWhere('content', 'like', $keyword . '%');
+        return $query->where('title', 'like', $keyword . '%')->orWhere('content', 'like', $keyword . '%');
     }
 
-    public function scopeOrderByUpdated($query, $order='desc')
+    public function scopeOrderByUpdated($query, $order = 'desc')
     {
         return $query->orderBy('updated_at', $order);
     }
 }
-

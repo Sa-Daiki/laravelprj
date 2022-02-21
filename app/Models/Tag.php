@@ -10,8 +10,7 @@ class Tag extends Model
     use HasFactory;
     public $timestamps = false;
     public function articles()
-        {
-            return $this->belongsToMany(Article::class, ArticleTags::class);
-        }
+    {
+        return $this->belongsToMany(Article::class, ArticleTags::class);
+    }
 }
-

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 class CommentStoreRequest extends FormRequest
 {
     /**
@@ -23,14 +24,14 @@ class CommentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment'=>'required'
+            'comment' => 'required'
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
-        "required" => "必須項目です。",
+            "required" => "必須項目です。",
         ];
     }
-
 }
