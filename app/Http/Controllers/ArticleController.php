@@ -59,16 +59,8 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $user = Auth()->user();
-        $article = Article::find($id)
-            ->where('status', 1)
-            ->where('user_id', $user['id'])
-            ->first();
-        $articles = Article::where('user_id', $user['id'])
-            ->where('status', 1)
-            ->orderBy('updated_at', 'DESC')
-            ->take(20)
-            ->get();
-        return view('articles.edit', compact('user', 'article', 'articles'));
+        $article = Article::find($id);
+        return view('articles.edit', compact('article'));
     }
 
     public function update(ArticleStoreRequest $request, $id)

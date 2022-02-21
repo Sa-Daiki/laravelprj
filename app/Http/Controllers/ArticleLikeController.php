@@ -25,19 +25,19 @@ class ArticleLikeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Article::find($request->article_id)->user_id;
-        if ($request->user()->id == $user) {
-            return redirect('/articles/' . $request->article_id);
-        } else {
-            if (ArticleLike::where('user_id', $request->user()->id)->where('article_id', $request->article_id)->exists()) {
-                ArticleLike::where('user_id', $request->user()->id)->where('article_id', $request->article_id)->delete();
-            } else {
-                ArticleLike::create([
-                    'article_id' => $request->article_id,
-                    'user_id' => $request->user()->id
-                ]);
-            }
+        $userId = Article::find($request->article_id)->user_id;
+        if ($request->user()->id == $userId) {
             return redirect('/articles/' . $request->article_id);
         }
+        $confirm = ArticleLike::where('user_id', $request->user()->id)->where('article_id', $request->article_id);
+        if ($confirm->exists()) {
+            $confirm->delete();
+            return redirect('/articles/' . $request->article_id);
+        }
+        ArticleLike::create([
+            'article_id' => $request->article_id,
+            'user_id' => $request->user()->id
+        ]);
+        return redirect('/articles/' . $request->article_id);
     }
 }

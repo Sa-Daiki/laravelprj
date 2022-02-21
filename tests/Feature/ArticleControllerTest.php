@@ -6,7 +6,6 @@ use App\Models\Article;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class ArticleControllerTest extends TestCase
@@ -17,7 +16,7 @@ class ArticleControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndexTitleDisplay()
     {
         $user = User::factory()->create();
         $article = Article::factory()->create([
@@ -63,7 +62,7 @@ class ArticleControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $article = Article::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $user->id
         ]);
         $response = $this->get("/articles/$article->id");
         $response->assertStatus(200);
@@ -73,7 +72,7 @@ class ArticleControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $article = Article::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $user->id
         ]);
         $response = $this->actingAs($user)
             ->putJson("/articles/$article->id", [
@@ -110,7 +109,7 @@ class ArticleControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $article = Article::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $user->id
         ]);
         $response = $this->actingAs($user)->get("/articles/$article->id/edit");
         $response->assertStatus(200);

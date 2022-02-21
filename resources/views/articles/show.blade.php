@@ -6,22 +6,20 @@
         <p> 更新日</p>
         <p class="articletitle">{{ $article['title'] }}</p>
         @foreach ($tags as $tag)
-            <p>タグ:<a href="/tags/{{ $tag['id'] }}">{{ $tag['title'] }}</a>
-            <p>
+            <p>タグ:<a href="/tags/{{ $tag['id'] }}">{{ $tag['title'] }}</a></p>
         @endforeach
         <p class="articlec">{{ $article['content'] }}</p>
 
     </div>
     <form method='POST' action="/comments" class="postcomment">
         @csrf
-        {{-- <input type="hidden" name="article_id" value="{{ $article['id']}}" class="hidden"> --}}
+        <input type="hidden" name="article_id" value="{{ $article['id']}}" class="hidden">
         <textarea name="comment" rows="3" cols="50" class="commentform"></textarea>
         <input type="submit" name="submit" value="投稿">
     </form>
     <form method='POST' action="/article_likes">
         @csrf
-        {{-- <input type='hidden' name='article_id' value="{{ $article['id']}}"> --}}
-        <button type='submit' class="LGTM" value="{{ $article['id'] }}">LG<br>TM</button>
+        <button type='submit' class="LGTM" name="article_id" value="{{ $article['id'] }}">LG<br>TM</button>
         <p>{{ $count }}</p>
     </form>
     @foreach ($comments as $comment)
@@ -33,8 +31,8 @@
             @if ($comment['user_id'] === $user['id'])
                 <input type='hidden' name='user_id' value="{{ $article['id'] }}">
                 <textarea name='comment'>
-                        {{ $comment['comment'] }}
-                    </textarea>
+                            {{ $comment['comment'] }}
+                        </textarea>
                 <button type='submit'>更新</button>
             @endif
         </form>
