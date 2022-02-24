@@ -27,17 +27,12 @@ class ArticleLikeController extends Controller
     {
         $article = Article::find($request->article_id);
         $userId = Article::find($request->article_id)->user_id;
-        $user = Article::find($request->article_id)->users()->where('user_id', $request->user()->id)->first();
-        // dd($user);
+        $user = Article::find($request->article_id)->users()->where('users.id', $request->user()->id);
         if ($request->user()->id === $userId) {
             return redirect('/articles/' . $request->article_id);
         }
-        // $confirm = ArticleLike::where('user_id', $request->user()->id)->where('article_id', $request->article_id);
-        // $confirm = $article->$user->isEmpty;
-        // dd($confirm);
-        dd($user->exists());
         if ($user->exists()) {
-            $user->delete();
+            $user->detach();
             return redirect('/articles/' . $request->article_id);
         }
         $article->users()->attach($request->user()->id);
