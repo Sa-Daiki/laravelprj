@@ -16,6 +16,7 @@ class ArticleControllerTest extends TestCase
      *
      * @return void
      */
+    // 記事のタイトルが表示されるかのテスト
     public function testIndexTitleDisplay()
     {
         $user = User::factory()->create();
@@ -27,6 +28,7 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    // タイトル、内容、タグが保存されるかどうかのテスト
     public function testStore()
     {
         $user = User::factory()->create();
@@ -58,6 +60,7 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    // 記事の詳細ページにアクセスできるかどうかのテスト
     public function testShow()
     {
         $user = User::factory()->create();
@@ -67,7 +70,7 @@ class ArticleControllerTest extends TestCase
         $response = $this->get("/articles/$article->id");
         $response->assertStatus(200);
     }
-
+    // 記事の更新できるかどうかのテスト
     public function testUpdate()
     {
         $user = User::factory()->create();
@@ -85,7 +88,7 @@ class ArticleControllerTest extends TestCase
         ]);
         $response->assertStatus(302);
     }
-
+    // 記事を削除できるかどうかのテスト
     public function testDestroy()
     {
         $user = User::factory()->create();
@@ -105,6 +108,7 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(302);
     }
 
+    // 記事を編集できるかどうかのテスト
     public function testEdit()
     {
         $user = User::factory()->create();

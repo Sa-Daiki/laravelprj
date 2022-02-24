@@ -13,7 +13,7 @@ class ArticleLikeControllerTest extends TestCase
     use RefreshDatabase;
     /**
      * いいね押したときに送信してデータベースに保存されるか
-     * いいねを消したときにデータベースから削除されるかー
+     * いいねを消したときにデータベースから削除されるか
      *
      * @return void
      */

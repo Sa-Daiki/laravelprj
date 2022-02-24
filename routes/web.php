@@ -20,7 +20,8 @@ use App\Http\Controllers\QuestionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('articles', ArticleController::class);
+Route::resource('articles', ArticleController::class)->middleware('auth');
+                                                                        // ->except(['index']);
 Route::resource('article_edits', ArticleEditController::class)->middleware('auth');
 Route::resource('article_likes', ArticleLikeController::class)->middleware('auth');
 Route::resource('comments', CommentController::class)->middleware('auth');
