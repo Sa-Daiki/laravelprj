@@ -32,7 +32,7 @@
                                                 {{ Str::substr(Auth::user()->name,0,1) }}
                                             </button>
                                             <ul class="usermenu" id="usermenu">
-                                                <li><a href="">マイページ</a></li>
+                                                <li><a href={{route('users.index')}}>マイページ</a></li>
                                                 <li><a>ストックした記事</a></li>
                                                 <li><a href="/articles/create">新規投稿（記事）</a></li>
                                                 <li><a>新規投稿（質問）</a></li>

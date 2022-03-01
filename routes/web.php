@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\CarController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +22,9 @@ use App\Http\Controllers\QuestionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('articles', ArticleController::class)->middleware('auth');
-                                                                        // ->except(['index']);
+Route::group(['middleware' => 'basicauth'], function() {
+    Route::resource('articles', ArticleController::class);
+});
 Route::resource('article_edits', ArticleEditController::class)->middleware('auth');
 Route::resource('article_likes', ArticleLikeController::class)->middleware('auth');
 Route::resource('comments', CommentController::class)->middleware('auth');
@@ -29,16 +32,10 @@ Route::resource('photos', PhotoController::class);
 Route::resource('questions', QuestionController::class);
 Route::resource('tags', TagController::class);
 Route::resource('users', UserController::class);
-
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::view('/', '/logouts');
-// Auth::routes();
+Route::get('/test', [CarController::class, 'index']);
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -27,6 +27,7 @@ class ArticleStoreRequest extends FormRequest
         return [
             'title' => 'required|string|max:20',
             'content' => 'required',
+            'tag' => 'required',
         ];
     }
 
@@ -34,6 +35,8 @@ class ArticleStoreRequest extends FormRequest
     {
         return [
             "title" => "必須項目です。",
+            "content" => "必須項目です。",
+            "tag" => "必須項目です。",
         ];
     }
 }

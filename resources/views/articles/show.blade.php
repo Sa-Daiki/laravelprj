@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     <div class="mainarticle">
-        <a href="#">{{ $userName }}</a>
+        <a href = {{route('users.show', $article->user->id)}}>{{ $userName }}</a>
         <p>投稿日</p>
         <p> 更新日</p>
         <p class="articletitle">{{ $article['title'] }}</p>
@@ -20,7 +20,7 @@
     <form method='POST' action="/article_likes">
         @csrf
         <button type='submit' class="LGTM" name="article_id" value="{{ $article['id'] }}">LG<br>TM</button>
-        <p>{{ $count }}</p>
+        <p>{{ $count }}</p>co
     </form>
     @foreach ($comments as $comment)
         <p>{{ $comment['comment'] }}</p>

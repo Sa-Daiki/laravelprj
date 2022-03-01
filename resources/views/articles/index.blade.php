@@ -6,7 +6,7 @@
         @endif
         @foreach ($articles as $article)
             <div class="articles">
-                <p class=articleuser><a href="#">{{ $article->user->name }}</a>が{{ $article->updated_at }}に投稿</p>
+                <p class=articleuser><a href={{route('users.show', $article->user->id)}}>{{ $article->user->name }}</a>が{{ $article->updated_at }}に投稿</p>
                 <a href="/articles/{{ $article['id'] }}" class=articletitle>{{ $article['title'] }}</a>
                 @foreach ($article->tags as $tag)
                     <a href="/tags/{{ $tag->id }}" class="articletag">{{ $tag->title }}</a>
